@@ -10,7 +10,7 @@ def test_dark_theme_by_time():
 
     is_dark_theme = None
 
-    if time(hour=22) <= current_time or current_time < time(hour=6) :
+    if 22 <= current_time.hour or current_time.hour < 6:
         is_dark_theme = True
     else:
         is_dark_theme = False
@@ -35,10 +35,10 @@ def test_dark_theme_by_time_and_user_choice():
 
     if dark_theme_enabled_by_user:
         is_dark_theme = True
-    elif dark_theme_enabled_by_user == 0:
+    elif dark_theme_enabled_by_user is False:
         is_dark_theme = False
     else:
-        if time(hour=22) <= current_time or current_time < time(hour=6):
+        if 22 <= current_time.hour or current_time.hour < 6:
             is_dark_theme = True
         else:
             is_dark_theme = False
@@ -62,11 +62,9 @@ def test_find_suitable_user():
     suitable_users = None
 
     for user in users:
-        if user['name']=='Olga':
+        if user['name'] == 'Olga':
             suitable_users = user
             break
-        else:
-            continue
 
     assert suitable_users == {"name": "Olga", "age": 45}
 
@@ -76,8 +74,6 @@ def test_find_suitable_user():
     for user in users:
         if user['age'] < 20:
             suitable_users.append(user)
-        else:
-            continue
 
     assert suitable_users == [
         {"name": "Stanislav", "age": 15},
@@ -101,12 +97,12 @@ def test_readable_function():
     go_to_companyname_homepage(page_url="https://companyname.com")
     find_registration_button_on_login_page(page_url="https://companyname.com/login", button_text="Register")
 
+
 def beaty_rename(func_name, *args):
     func_name = " ".join(func_name.__name__.split("_")).title()
-    args_name = ", ".join([*args])
+    args_name = ", ".join(args)
     print(f"{func_name} [{args_name}]")
     return f"{func_name} [{args_name}]"
-
 
 
 def open_browser(browser_name):
